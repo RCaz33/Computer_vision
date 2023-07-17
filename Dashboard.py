@@ -3,12 +3,22 @@ import pickle
 import base64
 import streamlit as st
 import numpy as np
+import subprocess
+
 from PIL import Image
+
+
+with st.spinner('Installing dependencies...'):
+    subprocess.run(["streamlit", "cache", "clear"])
+    time.sleep(0.05)
+    subprocess.run(["pip", "install", "--upgrade", "pip"], check=True, capture_output=True)
+
+    subprocess.check_call(["pip", "install", "-r", "requirements.txt"])
+    st.success("Requirements satisfied")
+
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.xception import preprocess_input
 from tensorflow.keras.models import load_model
-
-
 
 def get_model_and_breed_names():
     """ Load model and breed_names"""
@@ -50,11 +60,6 @@ def main():
         submit = submit_placeholder.button("Lancer la détection de race")
 
     if submit:
-            with st.spinner('Installing dependencies...'):
-                subprocess.run(["streamlit", "cache", "clear"])
-                time.sleep(0.05)
-                subprocess.check_call(["pip", "install", "-r", "requirements.txt"])
-                st.success("Dependencies installed successfully!")
         with st.spinner('Résultat en attente...'):
             submit_placeholder.empty()
             img_tensor = get_image(img)
