@@ -1,30 +1,44 @@
-import time
-import pickle
-import base64
+#***************************************************************
 import streamlit as st
-import numpy as np
 import subprocess
-
-from PIL import Image
-
+import time
 
 with st.spinner('Installing dependencies...'):
     subprocess.run(["streamlit", "cache", "clear"])
     time.sleep(0.05)
     subprocess.run(["pip", "install", "--upgrade", "pip"], check=True, capture_output=True)
 
-    subprocess.check_call(["pip", "install", "-r", "requirements.txt"])
+    subprocess.run(["pip", "install", "-r", "requirements.txt"])
     st.success("Requirements satisfied")
 
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.xception import preprocess_input
+#***************************************************************
+
+import pickle
+import numpy as np
+
+st.success("apres pickle et numpy")
+
+from PIL import Image
+
+
+st.success("apres PIL")
+
+import tensorflow as tf
+
+st.success("apres tf")
+
+
 from tensorflow.keras.models import load_model
+
+st.success("librairies imported")
 
 def get_model_and_breed_names():
     """ Load model and breed_names"""
     model = load_model("./model/model_vgg16_fine_tuned_6pic_4transf.keras", compile=False)
     breed_names = pickle.load(open("./model/breed_names.save", "rb"))
     return model, class_names
+
+st.success("model loaded")
 
 def get_image(img):
     """ transform into array and preprocess image """
