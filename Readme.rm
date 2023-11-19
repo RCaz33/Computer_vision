@@ -2,7 +2,7 @@ Contexte :
 
 Réalisation d'un algorithme de détection de la race du chien sur une photo.
 
-1 - pré-processer des images taile rotation, ect (possible avec whitening, equalization, ect)
+1 - pré-processer des images taille rotation, ect (possible avec whitening, equalization, ect)
 
 2 - utilisation de CNN et **comparaison des temps de traitement / résultat** :
 
